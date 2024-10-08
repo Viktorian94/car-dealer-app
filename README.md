@@ -14,6 +14,13 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+Step by step guid how to use this :
+1. Open localhost:3000  ![image](https://github.com/user-attachments/assets/5ab3035f-a1b3-4675-ba6a-e6f8f6593ed3)
+2. Choose option (click on select vehicle) ![image](https://github.com/user-attachments/assets/1fbf2b70-7bfe-44d5-8216-68aed5758eba)
+3. Then click to select year  ![image](https://github.com/user-attachments/assets/212b47f7-3e4d-4170-8f32-aa855577b49b)
+4. After that, you be able to click Next and go to the next page ![image](https://github.com/user-attachments/assets/9b1b44d0-f6ba-4466-b6da-e5fd2b5b5ca0)
+5. Done! You can go back, if wanna choose another option.
+
 
 *Overview of the Application’s Features and Architecture*
 Features:
