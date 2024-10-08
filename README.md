@@ -1,5 +1,3 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
-
 ## Getting Started
 
 First, run the development server:
@@ -16,21 +14,55 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+*Overview of the Application’s Features and Architecture*
+Features:
 
-## Learn More
+Vehicle Filtering:
+The home page (/) allows users to select a vehicle make and model year from dropdown menus. The makes are fetched from the National Highway Traffic Safety Administration (NHTSA) API, and years are dynamically generated from 2015 to the current year.
+Users can navigate to the result page after selecting a vehicle make and year, where they will see models filtered by those parameters.
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Dynamic Routes:
+Once a make and year are selected, the "Next" button navigates the user to a dynamically generated route: /results/[makeId]/[year]. This route displays the results of the vehicle models corresponding to the selected make and year.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+Static Path Generation:
+The application uses generateStaticParams to pre-render paths for some popular vehicle makes and recent years. This allows for faster page load times for the most common requests.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Suspense for Data Fetching:
+The Suspense component is utilized to show a loading state while fetching vehicle model data on the results page.
+
+
+Responsive Design:
+The UI is styled using Tailwind CSS for responsive design, ensuring the application works well across mobile and desktop screens.
+
+
+Architecture:
+Home Page (page.tsx):
+
+This page contains the vehicle filter form, allowing users to select a make and model year.
+The component uses the useState and useEffect hooks to manage the vehicle makes and update the selected values dynamically.
+The form makes a fetch request to the NHTSA API for vehicle makes and dynamically generates the options for the year selector.
+Result Page (app/results/[makeId]/[year]/page.tsx):
+
+This is the results page that displays vehicle models filtered by the selected make and year.
+It uses server-side functions to fetch vehicle models by make and year from the NHTSA API.
+A VehicleList component renders the fetched data, displaying the vehicle models in a grid format.
+Static Paths (generateStaticParams):
+
+The generateStaticParams function generates static paths for a subset of popular vehicle makes and years, improving performance by pre-rendering frequently accessed pages.
+
+
+Reusable Components:
+The application uses modular and reusable components like Select, Button, and VehicleList to create a clean and maintainable structure.
+UI elements such as dropdowns and buttons are abstracted into separate components located in the @/components/ui/ directory.
+
+
+Tailwind CSS:
+All styling is handled using Tailwind CSS, which provides utility-first classes for rapid UI development and responsive design.
+
+
+Error Handling:
+The application includes basic error handling for data fetching, ensuring that users are notified if something goes wrong during API calls.
